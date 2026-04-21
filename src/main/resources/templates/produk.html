@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Produk - Toko Kusen Online</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Toko Kusen Online</h1>
+            <nav>
+                <a href="/">Beranda</a>
+                <a href="/produk" class="active">Semua Produk</a>
+                <a href="/tambah-produk">Tambah Produk</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="page-header">
+                <h2 th:if="${jenisFilter}">Kusen Kayu <span th:text="${jenisFilter}">Meranti</span></h2>
+                <h2 th:unless="${jenisFilter}">Semua Produk Kusen</h2>
+                
+                <div class="filters">
+                    <a href="/produk" class="filter-btn" th:classappend="${jenisFilter == null} ? 'active'">Semua</a>
+                    <a href="/jenis/Meranti" class="filter-btn" th:classappend="${jenisFilter == 'Meranti'} ? 'active'">Meranti</a>
+                    <a href="/jenis/Jati" class="filter-btn" th:classappend="${jenisFilter == 'Jati'} ? 'active'">Jati</a>
+                    <a href="/jenis/Mahoni" class="filter-btn" th:classappend="${jenisFilter == 'Mahoni'} ? 'active'">Mahoni</a>
+                    <a href="/jenis/Pinus" class="filter-btn" th:classappend="${jenisFilter == 'Pinus'} ? 'active'">Pinus</a>
+                </div>
+            </section>
+
+            <section class="products">
+                <div class="product-grid">
+                    <div class="product-card" th:each="kusen : ${kusenList}">
+                        <div class="product-image">
+                            <span th:text="${kusen.nama}">Nama Produk</span>
+                        </div>
+                        <div class="product-info">
+                            <h4 th:text="${kusen.nama}">Nama Produk</h4>
+                            <p class="jenis-kayu" th:text="'Kayu: ' + ${kusen.jenisKayu}">Kayu: Meranti</p>
+                            <p class="ukuran" th:text="'Ukuran: ' + ${kusen.panjang} + 'x' + ${kusen.lebar} + 'x' + ${kusen.tebal} + ' cm'">Ukuran: 200x50x4 cm</p>
+                            <p class="stok" th:text="'Stok: ' + ${kusen.stok}">Stok: 10</p>
+                            <p class="harga" th:text="'Rp ' + ${#numbers.formatDecimal(kusen.harga, 1, 'COMMA', 0, 'POINT')}">Rp 500.000</p>
+                            <div class="product-actions">
+                                <a th:href="@{/produk/{id}(id=${kusen.id})}" class="btn-detail">Lihat Detail</a>
+                                <a th:href="@{/edit/{id}(id=${kusen.id})}" class="btn-edit">Edit</a>
+                                <a th:href="@{/hapus/{id}(id=${kusen.id})}" class="btn-delete" onclick="return confirm('Yakin ingin menghapus produk ini?')">Hapus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p th:if="${kusenList.isEmpty()}" class="empty-message">Tidak ada produk yang ditemukan.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Toko Kusen Online. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+</body>
+</html>

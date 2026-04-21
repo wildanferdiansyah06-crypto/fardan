@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${kusen.id != null} ? 'Edit Produk' : 'Tambah Produk'">Form Produk</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Toko Kusen Online</h1>
+            <nav>
+                <a href="/">Beranda</a>
+                <a href="/produk">Semua Produk</a>
+                <a href="/tambah-produk" class="active">Tambah Produk</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="form-section">
+                <h2 th:text="${kusen.id != null} ? 'Edit Produk' : 'Tambah Produk Baru'">Tambah Produk Baru</h2>
+                
+                <form th:action="${kusen.id != null} ? @{/edit/{id}(id=${kusen.id})} : @{/tambah-produk}" 
+                      th:method="${kusen.id != null} ? post : post" 
+                      th:object="${kusen}">
+                    
+                    <div class="form-group">
+                        <label for="nama">Nama Produk:</label>
+                        <input type="text" id="nama" th:field="*{nama}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi:</label>
+                        <textarea id="deskripsi" th:field="*{deskripsi}" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="harga">Harga (Rp):</label>
+                        <input type="number" id="harga" th:field="*{harga}" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenisKayu">Jenis Kayu:</label>
+                        <select id="jenisKayu" th:field="*{jenisKayu}" required>
+                            <option value="">Pilih Jenis Kayu</option>
+                            <option value="Meranti">Meranti</option>
+                            <option value="Jati">Jati</option>
+                            <option value="Mahoni">Mahoni</option>
+                            <option value="Pinus">Pinus</option>
+                            <option value="Ulin">Ulin</option>
+                            <option value="Bengkirai">Bengkirai</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="panjang">Panjang (cm):</label>
+                            <input type="number" id="panjang" th:field="*{panjang}" step="0.1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lebar">Lebar (cm):</label>
+                            <input type="number" id="lebar" th:field="*{lebar}" step="0.1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tebal">Tebal (cm):</label>
+                            <input type="number" id="tebal" th:field="*{tebal}" step="0.1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stok">Stok:</label>
+                        <input type="number" id="stok" th:field="*{stok}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gambar">URL Gambar (opsional):</label>
+                        <input type="text" id="gambar" th:field="*{gambar}">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" th:text="${kusen.id != null} ? 'Update' : 'Simpan'">Simpan</button>
+                        <a href="/produk" class="btn-cancel">Batal</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Toko Kusen Online. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+</body>
+</html>

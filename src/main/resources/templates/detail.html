@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${kusen.nama} + ' - Toko Kusen Online'">Detail Produk</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Toko Kusen Online</h1>
+            <nav>
+                <a href="/">Beranda</a>
+                <a href="/produk">Semua Produk</a>
+                <a href="/tambah-produk">Tambah Produk</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="product-detail">
+                <div class="detail-image">
+                    <span th:text="${kusen.nama}">Nama Produk</span>
+                </div>
+                <div class="detail-info">
+                    <h2 th:text="${kusen.nama}">Nama Produk</h2>
+                    <p class="detail-price" th:text="'Rp ' + ${#numbers.formatDecimal(kusen.harga, 1, 'COMMA', 0, 'POINT')}">Rp 500.000</p>
+                    
+                    <div class="detail-specs">
+                        <h3>Spesifikasi</h3>
+                        <table>
+                            <tr>
+                                <td>Jenis Kayu:</td>
+                                <td th:text="${kusen.jenisKayu}">Meranti</td>
+                            </tr>
+                            <tr>
+                                <td>Panjang:</td>
+                                <td th:text="${kusen.panjang} + ' cm'">200 cm</td>
+                            </tr>
+                            <tr>
+                                <td>Lebar:</td>
+                                <td th:text="${kusen.lebar} + ' cm'">50 cm</td>
+                            </tr>
+                            <tr>
+                                <td>Tebal:</td>
+                                <td th:text="${kusen.tebal} + ' cm'">4 cm</td>
+                            </tr>
+                            <tr>
+                                <td>Stok:</td>
+                                <td th:text="${kusen.stok}">10</td>
+                            </tr>
+                            <tr>
+                                <td>Status:</td>
+                                <td th:text="${kusen.tersedia} ? 'Tersedia' : 'Tidak Tersedia'">Tersedia</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="detail-description">
+                        <h3>Deskripsi</h3>
+                        <p th:text="${kusen.deskripsi}">Deskripsi produk</p>
+                    </div>
+
+                    <div class="detail-actions">
+                        <a href="/produk" class="btn-back">Kembali ke Daftar</a>
+                        <a th:href="@{/edit/{id}(id=${kusen.id})}" class="btn-edit">Edit Produk</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Toko Kusen Online. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Kusen Online</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Toko Kusen Online</h1>
+            <nav>
+                <a href="/">Beranda</a>
+                <a href="/produk">Semua Produk</a>
+                <a href="/tambah-produk">Tambah Produk</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h2>Kusen Berkualitas Tinggi</h2>
+                <p>Temukan berbagai jenis kusen kayu berkualitas untuk rumah Anda</p>
+            </section>
+
+            <section class="products">
+                <h3>Produk Terbaru</h3>
+                <div class="product-grid">
+                    <div class="product-card" th:each="kusen : ${kusenList}">
+                        <div class="product-image">
+                            <span th:text="${kusen.nama}">Nama Produk</span>
+                        </div>
+                        <div class="product-info">
+                            <h4 th:text="${kusen.nama}">Nama Produk</h4>
+                            <p class="jenis-kayu" th:text="'Kayu: ' + ${kusen.jenisKayu}">Kayu: Meranti</p>
+                            <p class="ukuran" th:text="'Ukuran: ' + ${kusen.panjang} + 'x' + ${kusen.lebar} + 'x' + ${kusen.tebal} + ' cm'">Ukuran: 200x50x4 cm</p>
+                            <p class="stok" th:text="'Stok: ' + ${kusen.stok}">Stok: 10</p>
+                            <p class="harga" th:text="'Rp ' + ${#numbers.formatDecimal(kusen.harga, 1, 'COMMA', 0, 'POINT')}">Rp 500.000</p>
+                            <a th:href="@{/produk/{id}(id=${kusen.id})}" class="btn-detail">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Toko Kusen Online. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+</body>
+</html>
