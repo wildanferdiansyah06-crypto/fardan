@@ -1,6 +1,7 @@
 package com.kusen.repository;
 
 import com.kusen.model.Order;
+import com.kusen.model.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     
     Optional<Order> findFirstBySessionIdOrderByTanggalOrderDesc(String sessionId);
     
-    List<Order> findByStatusOrderByTanggalOrderDesc(com.kusen.model.OrderStatus status);
+    List<Order> findByStatusOrderByTanggalOrderDesc(OrderStatus status);
 }

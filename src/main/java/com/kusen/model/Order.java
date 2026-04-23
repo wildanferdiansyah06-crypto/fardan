@@ -141,12 +141,3 @@ public class Order {
         this.catatan = catatan;
     }
 }
-
-enum OrderStatus {
-    PENDING,
-    CONFIRMED,
-    PROCESSING,
-    SHIPPED,
-    DELIVERED,
-    CANCELLED
-}
