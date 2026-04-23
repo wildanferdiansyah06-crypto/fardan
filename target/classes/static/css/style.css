@@ -218,6 +218,8 @@ header h1 .brand-text {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-size: 1.75rem;
+    font-weight: 700;
 }
 
 /* Navigation */
@@ -1517,6 +1519,16 @@ footer .copyright {
     
     .social-links {
         justify-content: center;
+    }
+    
+    header h1 .brand-text {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 .brand-text {
+        font-size: 1rem;
     }
 }
 

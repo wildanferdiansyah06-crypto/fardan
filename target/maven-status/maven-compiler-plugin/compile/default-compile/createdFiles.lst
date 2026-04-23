@@ -1,0 +1,12 @@
+com\kusen\model\OrderItem.class
+com\kusen\KusenShopApplication.class
+com\kusen\repository\KusenRepository.class
+com\kusen\model\CartItem.class
+com\kusen\model\Order.class
+com\kusen\repository\OrderItemRepository.class
+com\kusen\repository\OrderRepository.class
+com\kusen\repository\CartItemRepository.class
+com\kusen\model\OrderStatus.class
+com\kusen\controller\KusenController.class
+com\kusen\config\DataLoader.class
+com\kusen\model\Kusen.class
