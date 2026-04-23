@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Toko Kusen Online</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏠 Toko Kusen Online</h1>
+            <nav>
+                <a href="/">Beranda</a>
+                <a href="/produk">Semua Produk</a>
+                <a href="/kategori/Pintu">Pintu</a>
+                <a href="/kategori/Jendela">Jendela</a>
+                <a href="/kategori/Daun Pintu">Daun Pintu</a>
+                <a href="/tentang">Tentang Kami</a>
+                <a href="/kontak">Kontak</a>
+                <a href="/cart" class="active">🛒 Keranjang</a>
+                <a href="/pesanan">📦 Pesanan Saya</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="page-header">
+                <h2>Keranjang Belanja</h2>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-light);">Kelola produk yang ingin Anda beli di sini.</p>
+            </section>
+
+            <div th:if="${cartItems.isEmpty()}" class="empty-message">
+                <h3>Keranjang Anda Kosong</h3>
+                <p>Belum ada produk yang ditambahkan ke keranjang.</p>
+                <div style="margin-top: 30px;">
+                    <a href="/produk" class="btn btn-primary">Lihat Produk</a>
+                </div>
+            </div>
+
+            <div th:unless="${cartItems.isEmpty()}" style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;">
+                <div style="background: var(--white); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--primary-color);">Produk di Keranjang</h3>
+                    
+                    <div th:each="item : ${cartItems}" style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--light-color);">
+                        <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; overflow: hidden; flex-shrink: 0;">
+                            <img th:if="${item.product.gambarUrl != null}" th:src="${item.product.gambarUrl}" th:alt="${item.product.nama}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--primary-color);" th:text="${item.product.nama}">Nama Produk</h4>
+                            <p style="color: var(--text-light); margin-bottom: 10px;" th:text="'Kayu: ' + ${item.product.jenisKayu}">Kayu: Meranti</p>
+                            <p style="font-weight: 600; color: var(--accent-color); margin-bottom: 15px;" th:text="'Rp ' + ${#numbers.formatDecimal(item.product.harga, 1, 'COMMA', 0, 'POINT')}">Rp 500.000</p>
+                            
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <form th:action="@{/cart/update}" method="post" style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="hidden" name="itemId" th:value="${item.id}">
+                                    <input type="number" name="quantity" th:value="${item.quantity}" min="1" style="width: 70px; padding: 8px; border: 2px solid var(--light-color); border-radius: 8px; text-align: center;">
+                                    <button type="submit" class="btn btn-secondary" style="padding: 8px 16px;">Update</button>
+                                </form>
+                                <a th:href="@{/cart/remove/{id}(id=${item.id})}" class="btn btn-danger" style="padding: 8px 16px;" onclick="return confirm('Hapus produk dari keranjang?')">Hapus</a>
+                            </div>
+                            
+                            <p style="margin-top: 15px; font-weight: 600; color: var(--primary-color);" th:text="'Subtotal: Rp ' + ${#numbers.formatDecimal(item.totalPrice, 1, 'COMMA', 0, 'POINT')}">Subtotal: Rp 500.000</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <a href="/cart/clear" class="btn btn-light" onclick="return confirm('Kosongkan keranjang?')" style="margin-right: 10px;">Kosongkan Keranjang</a>
+                        <a href="/produk" class="btn btn-primary">Lanjut Belanja</a>
+                    </div>
+                </div>
+
+                <div style="background: var(--white); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow); height: fit-content;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--primary-color);">Ringkasan Pesanan</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: var(--text-light);">Jumlah Item:</span>
+                            <span style="font-weight: 600;" th:text="${cartItems.size()}">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: var(--text-light);">Subtotal:</span>
+                            <span style="font-weight: 600;" th:text="'Rp ' + ${#numbers.formatDecimal(total, 1, 'COMMA', 0, 'POINT')}">Rp 0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: var(--text-light);">Ongkos Kirim:</span>
+                            <span style="font-weight: 600; color: var(--success-color);">Gratis</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 2px solid var(--light-color); padding-top: 20px; margin-bottom: 30px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary-color);">Total:</span>
+                            <span style="font-size: 1.5rem; font-weight: 700; color: var(--accent-color);" th:text="'Rp ' + ${#numbers.formatDecimal(total, 1, 'COMMA', 0, 'POINT')}">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <a href="/checkout" class="btn btn-success" style="width: 100%; padding: 15px; font-size: 1.1rem; display: block; text-align: center; text-decoration: none;">Checkout</a>
+                    
+                    <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-light);">
+                        🔒 Pembayaran aman dan terpercaya
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div>
+                <h3>Toko Kusen Online</h3>
+                <p>Penyedia kusen kayu berkualitas premium untuk segala kebutuhan konstruksi dan renovasi rumah Anda.</p>
+            </div>
+            <div>
+                <h3>Kategori</h3>
+                <p><a href="/kategori/Pintu" style="color: white; text-decoration: none;">Pintu</a></p>
+                <p><a href="/kategori/Jendela" style="color: white; text-decoration: none;">Jendela</a></p>
+                <p><a href="/kategori/Daun Pintu" style="color: white; text-decoration: none;">Daun Pintu</a></p>
+            </div>
+            <div>
+                <h3>Jenis Kayu</h3>
+                <p>Jati, Meranti, Mahoni, Ulin, Bengkirai, Pinus</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Toko Kusen Online. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

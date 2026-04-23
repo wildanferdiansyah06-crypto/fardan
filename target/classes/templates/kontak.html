@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Toko Kusen Online</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏠 Toko Kusen Online</h1>
+            <nav>
+                <a href="/">Beranda</a>
+                <a href="/produk">Semua Produk</a>
+                <a href="/kategori/Pintu">Pintu</a>
+                <a href="/kategori/Jendela">Jendela</a>
+                <a href="/kategori/Daun Pintu">Daun Pintu</a>
+                <a href="/tentang">Tentang Kami</a>
+                <a href="/kontak" class="active">Kontak</a>
+                <a href="/cart">🛒 Keranjang</a>
+                <a href="/pesanan">📦 Pesanan Saya</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="page-header">
+                <h2>Hubungi Kami</h2>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-light);">Kami siap membantu Anda. Hubungi kami untuk pertanyaan, konsultasi, atau pemesanan.</p>
+            </section>
+
+            <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                <div style="background: var(--white); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--primary-color);">Informasi Kontak</h3>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 1.5rem;">📍</div>
+                            <div>
+                                <strong style="color: var(--primary-color);">Alamat</strong>
+                                <p style="color: var(--text-light); margin: 5px 0 0 0;">Jl. Kayu Jati No. 123, Jakarta Selatan, Indonesia 12345</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 1.5rem;">📞</div>
+                            <div>
+                                <strong style="color: var(--primary-color);">Telepon</strong>
+                                <p style="color: var(--text-light); margin: 5px 0 0 0;">+62 21 1234 5678</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 1.5rem;">📧</div>
+                            <div>
+                                <strong style="color: var(--primary-color);">Email</strong>
+                                <p style="color: var(--text-light); margin: 5px 0 0 0;">info@tokokusenonline.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="font-size: 1.5rem;">🕐</div>
+                            <div>
+                                <strong style="color: var(--primary-color);">Jam Operasional</strong>
+                                <p style="color: var(--text-light); margin: 5px 0 0 0;">Senin - Sabtu: 08:00 - 17:00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--white); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--primary-color);">Kirim Pesan</h3>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap:</label>
+                            <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" placeholder="Masukkan email Anda" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telepon">Telepon:</label>
+                            <input type="tel" id="telepon" placeholder="Masukkan nomor telepon">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subjek">Subjek:</label>
+                            <input type="text" id="subjek" placeholder="Subjek pesan Anda" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pesan">Pesan:</label>
+                            <textarea id="pesan" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan</button>
+                    </form>
+                </div>
+            </section>
+
+            <section style="background: var(--white); padding: 50px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                <h3 style="font-size: 2rem; margin-bottom: 30px; color: var(--primary-color); text-align: center;">Lokasi Kami</h3>
+                <div style="background: var(--light-color); height: 300px; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; color: var(--text-light);">
+                    <p>🗺️ Peta Google Maps akan ditampilkan di sini</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div>
+                <h3>Toko Kusen Online</h3>
+                <p>Penyedia kusen kayu berkualitas premium untuk segala kebutuhan konstruksi dan renovasi rumah Anda.</p>
+            </div>
+            <div>
+                <h3>Kategori</h3>
+                <p><a href="/kategori/Pintu" style="color: white; text-decoration: none;">Pintu</a></p>
+                <p><a href="/kategori/Jendela" style="color: white; text-decoration: none;">Jendela</a></p>
+                <p><a href="/kategori/Daun Pintu" style="color: white; text-decoration: none;">Daun Pintu</a></p>
+            </div>
+            <div>
+                <h3>Jenis Kayu</h3>
+                <p>Jati, Meranti, Mahoni, Ulin, Bengkirai, Pinus</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Toko Kusen Online. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

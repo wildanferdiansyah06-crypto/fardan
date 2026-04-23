@@ -52,6 +52,13 @@ public class Kusen {
     @Column(nullable = false)
     private Boolean tersedia = true;
 
+    private String kategori;
+    private String gambarUrl;
+    private String material;
+    private String warna;
+    private Double rating;
+    private Integer terjual;
+
     public Kusen() {
     }
 
@@ -65,6 +72,25 @@ public class Kusen {
         this.lebar = lebar;
         this.tebal = tebal;
         this.stok = stok;
+    }
+
+    public Kusen(String nama, String deskripsi, Double harga, String jenisKayu, 
+                 Double panjang, Double lebar, Double tebal, Integer stok, String kategori, 
+                 String gambarUrl, String material, String warna, Double rating, Integer terjual) {
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.harga = harga;
+        this.jenisKayu = jenisKayu;
+        this.panjang = panjang;
+        this.lebar = lebar;
+        this.tebal = tebal;
+        this.stok = stok;
+        this.kategori = kategori;
+        this.gambarUrl = gambarUrl;
+        this.material = material;
+        this.warna = warna;
+        this.rating = rating;
+        this.terjual = terjual;
     }
 
     // Getters and Setters
@@ -154,5 +180,53 @@ public class Kusen {
 
     public void setTersedia(Boolean tersedia) {
         this.tersedia = tersedia;
+    }
+
+    public String getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
+    }
+
+    public String getGambarUrl() {
+        return gambarUrl;
+    }
+
+    public void setGambarUrl(String gambarUrl) {
+        this.gambarUrl = gambarUrl;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getWarna() {
+        return warna;
+    }
+
+    public void setWarna(String warna) {
+        this.warna = warna;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getTerjual() {
+        return terjual;
+    }
+
+    public void setTerjual(Integer terjual) {
+        this.terjual = terjual;
     }
 }

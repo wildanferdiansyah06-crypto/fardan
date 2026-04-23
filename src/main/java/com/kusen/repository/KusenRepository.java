@@ -14,4 +14,10 @@ public interface KusenRepository extends JpaRepository<Kusen, Long> {
     List<Kusen> findByJenisKayu(String jenisKayu);
     
     List<Kusen> findByJenisKayuAndTersediaTrue(String jenisKayu);
+    
+    List<Kusen> findByKategoriAndTersediaTrue(String kategori);
+    
+    List<Kusen> findByNamaContainingIgnoreCaseAndTersediaTrue(String nama);
+    
+    List<Kusen> findByKategoriAndJenisKayuAndTersediaTrue(String kategori, String jenisKayu);
 }
